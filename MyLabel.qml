@@ -16,23 +16,9 @@ Column {
         visible: false
     }
 
-    PropertyAnimation{
-        id: animBarbie
-        property : "height"
-        duration: 400
-    }
-
-    PropertyAnimation{
-        id: animGiant
-        property : "height"
-        duration: 400
-    }
-
-    PropertyAnimation{
-        id: animNormal
-        property : "height"
-        duration: 200
-    }
+    PropertyAnimation{ id: animBarbie; property : "height"; duration: 400 }
+    PropertyAnimation{ id: animGiant; property : "height"; duration: 400 }
+    PropertyAnimation{ id: animNormal; property : "height"; duration: 200 }
 
     Repeater{
         id:repeat
@@ -45,11 +31,7 @@ Column {
             border.width: 1
             border.color: "black"
 
-            Binding{
-                target: deleg
-                property: "height"
-                value: normalHeight
-            }
+            Binding{ target: deleg; property: "height"; value: normalHeight}
 
             Text{
                 anchors.fill:parent

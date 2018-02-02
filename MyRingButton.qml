@@ -16,7 +16,21 @@ Rectangle {
                                                                     ,"indigo", "yellow", "teal", "turquoise", "springgreen","sienna", "lightgoldenrodyellow", "orangered", "goldenrod"]
     property string text
     property int group : 0
-    property var lev
+    property bool onFocus: false
+
+    states: State {
+        name: "onFocus"; when: onFocus === true
+        PropertyChanges { target: circleButton; border.width: 4}
+        PropertyChanges { target: txt; opacity: 1 }
+    }
+    transitions: Transition {
+        to: "onFocus"; reversible: true
+        SequentialAnimation{
+            PropertyAnimation{target: txt; property: "opacity"; duration: 800}
+            PropertyAnimation{target: circleButton; property: "border.width"; duration: 400}
+        }
+    }
+
     PropertyAnimation{
         id: anim
         target: circleButton
@@ -31,18 +45,6 @@ Rectangle {
         duration: 400
     }
 
-
-    PropertyAnimation{
-        id: animL
-        target: lev
-        property: "opacity"
-        duration: 2000
-    }
-
-//    Levitate{
-//        id:lev
-//    }
-
     Text {
         id: txt
         anchors.verticalCenter: parent.verticalCenter
@@ -52,60 +54,16 @@ Rectangle {
     }
 
     MouseArea{
+        id:mouseArea
         anchors.fill:parent
         hoverEnabled: true
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked:{
-            if(mouse.button === Qt.LeftButton)
             group = (group + 1)%20
-            if(mouse.button === Qt.RightButton){
-                lev.show = true;
-                lev.opacity = 1;
-                lev.text = qsTr("%1").arg(group);
-                animL.stop();
-            }
         }
 
-        onEntered:{
-            anim.stop();
-            animT.stop();
-            animL.stop();
-            anim.to = 4;
-            anim.start();
+        onEntered: onFocus = true
 
-            animT.to = 1
-            animT.start();
-
-            if(!lev.show){
-                animL.to = 1;
-                animL.start();
-            }
-        }
-
-        onMouseXChanged: {
-            if(!lev.show)
-            lev.x = mouseX + 10;
-        }
-        onMouseYChanged: {
-            if(!lev.show)
-            lev.y = mouseY + 10;
-        }
-        onExited: {
-            anim.stop();
-            animT.stop();
-            animL.stop();
-            anim.to = 0.5;
-            anim.start();
-
-            animT.to = 0
-            animT.start();
-
-            if(!lev.show){
-                animL.duration = 300
-                animL.to = 0;
-                animL.start();
-            }
-        }
+        onExited: onFocus = false;
     }
 
     onGroupChanged:{

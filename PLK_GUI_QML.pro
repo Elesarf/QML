@@ -37,3 +37,5 @@ HEADERS += \
     labelmodelcontroller.h \
     pinscontroller.h \
     pinsmodel.h
+
+DISTFILES +=

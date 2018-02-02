@@ -88,6 +88,7 @@ bool PinsModel::insertRows(int row, int count, const QModelIndex &parent)
     beginInsertRows(parent, row, row + count - 1);
     // FIXME: Implement me!
     endInsertRows();
+    return false;
 }
 
 bool PinsModel::fromVariantList(const QVariantList &list)

@@ -13,6 +13,16 @@ Rectangle{
     border.color: "black"
     z:3
 
+    states: State {
+        name: "show"; when: rect.show == true
+        PropertyChanges { target: rect; opacity:1}
+    }
+
+    transitions: Transition {
+        to: "show"; reversible: true
+        PropertyAnimation{target: rect; property: "opacity"; duration: 300}
+    }
+
     Row{
         anchors.bottom: rect.bottom
         anchors.bottomMargin: rect.border.width
@@ -20,21 +30,17 @@ Rectangle{
         anchors.leftMargin: rect.border.width
         Controls.Button{
             id: ok
-            z:2
             text: "ok"
             width: rect.width/2 - rect.border.width
             onClicked: {
-                rect.opacity = 0;
                 show = false;
             }
         }
         Controls.Button{
             id: cancel
-            z:2
             text: "cancel"
             width: rect.width/2 - rect.border.width
             onClicked: {
-                rect.opacity = 0;
                 show = false;
             }
         }

@@ -38,20 +38,30 @@ Window {
         height: 450
         border.width: 3
 
-        Text {
-            id: text1
-            text: qsTr("PLK")
-            font.pointSize: 20
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.horizontalCenter: parent.horizontalCenter
+        Image {
+            id: img
+            width: parent.height-6
+            height: parent.width-6
+            rotation: 90
+            anchors.verticalCenter: controller.verticalCenter
+            anchors.horizontalCenter: controller.horizontalCenter
+            source: "qrc:/plk110-220.60.r.jpg"
         }
+//        Text {
+//            id: text1
+//            text: qsTr("PLK")
+//            font.pointSize: 20
+//            anchors.verticalCenter: parent.verticalCenter
+//            anchors.horizontalCenter: parent.horizontalCenter
+//        }
     }
 
     MyLabel{
         id:ml
         height: parent.height - labelButtonRow.height
         anchors.top: labelButtonRow.bottom
-        anchors.left: pinsViewOut.right
+//        anchors.left: pinsViewOut.right
+        width: 250
         anchors.leftMargin: 120
         anchors.right: parent.right
         dim : szL
